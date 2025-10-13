@@ -4,19 +4,26 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.todoapp.ui.screens.list.ListScreen
+import com.example.todoapp.ui.viewmodels.SharedViewModel
 import com.example.todoapp.util.Constants.LIST_SCREEN
 import com.example.todoapp.util.Constants.LIST_ARGUMENT_KEY
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (taskId: Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
 
     composable(
         route = LIST_SCREEN,
         arguments = listOf(navArgument(LIST_ARGUMENT_KEY) {
             type = NavType.StringType
+            defaultValue = "-1" // ⬅️ AGREGA ESTO
         })
     ){
-
+        ListScreen(
+            navigateToTaskScreen = navigateToTaskScreen,
+            sharedViewModel = sharedViewModel
+        )
     }
 }
